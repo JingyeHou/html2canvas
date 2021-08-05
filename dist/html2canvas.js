@@ -1,6 +1,6 @@
 /*!
  * html2canvas 1.0.0-alpha.10 <https://html2canvas.hertzen.com>
- * Copyright (c) 2020 Niklas von Hertzen <https://hertzen.com>
+ * Copyright (c) 2021 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -848,6 +848,9 @@ exports.default = NodeContainer;
 
 var getImage = function getImage(node, resourceLoader) {
     if (node instanceof node.ownerDocument.defaultView.SVGSVGElement || node instanceof SVGSVGElement) {
+        var bounds = (0, _Bounds.parseBounds)(node, 0, 0);
+        node.setAttribute('width', bounds.width + 'px');
+        node.setAttribute('height', bounds.height + 'px');
         var s = new XMLSerializer();
         return resourceLoader.loadImage('data:image/svg+xml,' + encodeURIComponent(s.serializeToString(node)));
     }

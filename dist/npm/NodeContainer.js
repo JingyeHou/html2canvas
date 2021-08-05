@@ -216,6 +216,9 @@ exports.default = NodeContainer;
 
 var getImage = function getImage(node, resourceLoader) {
     if (node instanceof node.ownerDocument.defaultView.SVGSVGElement || node instanceof SVGSVGElement) {
+        var bounds = (0, _Bounds.parseBounds)(node, 0, 0);
+        node.setAttribute('width', bounds.width + 'px');
+        node.setAttribute('height', bounds.height + 'px');
         var s = new XMLSerializer();
         return resourceLoader.loadImage('data:image/svg+xml,' + encodeURIComponent(s.serializeToString(node)));
     }
